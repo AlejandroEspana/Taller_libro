@@ -1,33 +1,45 @@
 {% extends 'gestion/base.html' %}
 
-{% block title %}Listado de autores{% endblock %}
+{% block title %}Autores{% endblock %}
 
 {% block content %}
-<h2>Autores</h2>
+<div class="page-head">
+    <h2>Autores</h2>
+    <a class="button success" href="{% url 'crear_autor' %}">Agregar autor</a>
+</div>
 
 {% if autores %}
-<table>
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Nacionalidad</th>
-            <th>Fecha de nacimiento</th>
-            <th>Biografia</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for autor in autores %}
-        <tr>
-            <td>{{ autor.nombre }}</td>
-            <td>{{ autor.correo }}</td>
-            <td>{{ autor.nacionalidad }}</td>
-            <td>{{ autor.fecha_nacimiento }}</td>
-            <td>{{ autor.biografia|default:'Sin biografia registrada' }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Nacionalidad</th>
+                <th>Fecha de nacimiento</th>
+                <th>Biografia</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for autor in autores %}
+            <tr>
+                <td>{{ autor.nombre }}</td>
+                <td>{{ autor.correo }}</td>
+                <td>{{ autor.nacionalidad }}</td>
+                <td>{{ autor.fecha_nacimiento }}</td>
+                <td>{{ autor.biografia|default:'Sin biografia registrada' }}</td>
+                <td>
+                    <div class="actions">
+                        <a class="button" href="{% url 'actualizar_autor' autor.pk %}">Editar</a>
+                        <a class="button danger" href="{% url 'eliminar_autor' autor.pk %}">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% else %}
 <p class="empty">No hay autores registrados.</p>
 {% endif %}
