@@ -40,6 +40,21 @@ DJANGO_SECRET_KEY=<clave-segura>
 DATABASE_URL=<url-de-postgres>
 ```
 
+Despues de configurar `DATABASE_URL`, haz un redeploy. El build ejecuta:
+
+```powershell
+python manage.py migrate
+python manage.py collectstatic --noinput
+```
+
+Si necesitas aplicar migraciones manualmente a Railway desde tu equipo, configura temporalmente `DATABASE_URL` con la URL publica de Railway y ejecuta:
+
+```powershell
+$env:DATABASE_URL="postgresql://usuario:password@host-publico:puerto/base"
+python manage.py migrate
+Remove-Item Env:\DATABASE_URL
+```
+
 Para generar una clave local:
 
 ```powershell
