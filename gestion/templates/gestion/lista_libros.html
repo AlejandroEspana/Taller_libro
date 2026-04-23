@@ -14,6 +14,7 @@
             <th>Genero</th>
             <th>ISBN</th>
             <th>Autor</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +25,9 @@
             <td>{{ libro.genero }}</td>
             <td>{{ libro.isbn }}</td>
             <td>{{ libro.autor.nombre }}</td>
+            <td>
+                <a href="{% url 'eliminar_libro' libro.pk %}">Eliminar</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
