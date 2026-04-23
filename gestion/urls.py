@@ -37,6 +37,15 @@ class AutorForm(forms.ModelForm):
             'biografia': 'Biografía',
         }
 
+urlpatterns = [
+    path('', views.inicio, name='inicio'),
+    path('autores/', views.lista_autores, name='lista_autores'),
+    path('autores/crear/', views.crear_autor, name='crear_autor'),
+    path('libros/', views.lista_libros, name='lista_libros'),
+    path('libros/crear/', views.crear_libro, name='crear_libro'),
+    path('autor/eliminar/<int:pk>/', views.eliminar_autor, name='eliminar_autor'),
+    path('libro/eliminar/<int:pk>/', views.eliminar_libro, name='eliminar_libro'),
+]
 
 class LibroForm(forms.ModelForm):
     class Meta:
