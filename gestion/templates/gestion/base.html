@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Gestion de libros{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f7fb;
+            color: #202124;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 18px 32px;
+        }
+
+        nav {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 32px auto;
+            padding: 0 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #e5e7eb;
+        }
+
+        .empty {
+            background: white;
+            padding: 18px;
+            border: 1px solid #e5e7eb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Administracion de libros</h1>
+        <nav>
+            <a href="{% url 'lista_autores' %}">Autores</a>
+            <a href="{% url 'lista_libros' %}">Libros</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
