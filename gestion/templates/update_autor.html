@@ -1,0 +1,8 @@
+<!-- Template para actualizar un Autor -->
+<h2>Actualizar Autor</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Actualizar</button>
+</form>
+<a href="{% url 'lista_autores' %}">Volver a la lista de autores</a>
