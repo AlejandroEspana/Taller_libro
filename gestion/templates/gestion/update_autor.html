@@ -1,242 +1,44 @@
-<!-- Template para actualizar un Autor -->
-<!DOCTYPE html>
-<html lang="es">
+<form method="post" novalidate>
+    {% csrf_token %}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Actualizar Autor</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Epilogue:wght@300;400;500;600&display=swap"
-        rel="stylesheet" />
-    <style>
-        :root {
-            --bg: #f7f4ef;
-            --surface: #ffffff;
-            --border: #e2ddd6;
-            --accent: #2d5016;
-            --accent-soft: rgba(45, 80, 22, 0.1);
-            --text: #1c1c1a;
-            --muted: #7a7670;
-            --radius: 10px;
-        }
+    {{ form.non_field_errors }}
 
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    <div class="form-grid">
 
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Epilogue', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2.5rem 3rem;
-            width: 100%;
-            max-width: 580px;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
-            animation: fadeUp 0.4s ease both;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .card-header {
-            margin-bottom: 1.8rem;
-            padding-bottom: 1.2rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .label-tag {
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--accent);
-            display: block;
-            margin-bottom: 0.35rem;
-        }
-
-        h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            line-height: 1.1;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem 1.4rem;
-        }
-
-        .full {
-            grid-column: 1 / -1;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-        }
-
-        .form-group label {
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--muted);
-        }
-
-        .form-input,
-        input.form-input,
-        textarea.form-input,
-        select.form-input {
-            width: 100%;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            color: var(--text);
-            font-family: 'Epilogue', sans-serif;
-            font-size: 0.9rem;
-            padding: 0.65rem 0.9rem;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            appearance: none;
-        }
-
-        textarea.form-input {
-            resize: vertical;
-            min-height: 90px;
-        }
-
-        .form-input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-soft);
-            background: #fff;
-        }
-
-        ul.errorlist {
-            list-style: none;
-            margin-top: 0.3rem;
-        }
-
-        ul.errorlist li {
-            font-size: 0.76rem;
-            color: #8b2020;
-        }
-
-        .form-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 1.8rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            border-radius: var(--radius);
-            font-family: 'Epilogue', sans-serif;
-            font-weight: 600;
-            font-size: 0.86rem;
-            padding: 0.65rem 1.5rem;
-            cursor: pointer;
-            transition: opacity 0.2s, transform 0.15s;
-        }
-
-        .btn-primary:hover {
-            opacity: 0.87;
-            transform: translateY(-1px);
-        }
-
-        .btn-back {
-            color: var(--muted);
-            font-size: 0.84rem;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .btn-back:hover {
-            color: var(--text);
-        }
-    </style>
-</head>
-
-<body>
-    <div class="card">
-        <div class="card-header">
-            <span class="label-tag">Autores</span>
-            <h2>Actualizar Autor</h2>
+        <div class="form-group">
+            <label for="{{ form.nombre.id_for_label }}">{{ form.nombre.label }}</label>
+            {{ form.nombre }}
+            {{ form.nombre.errors }}
         </div>
 
-        <form method="post" novalidate>
-            {% csrf_token %}
-            <div class="form-grid">
+        <div class="form-group">
+            <label for="{{ form.correo.id_for_label }}">{{ form.correo.label }}</label>
+            {{ form.correo }}
+            {{ form.correo.errors }}
+        </div>
 
-                <div class="form-group">
-                    <label for="{{ form.nombre.id_for_label }}">{{ form.nombre.label }}</label>
-                    {{ form.nombre }}
-                    {{ form.nombre.errors }}
-                </div>
+        <div class="form-group">
+            <label for="{{ form.nacionalidad.id_for_label }}">{{ form.nacionalidad.label }}</label>
+            {{ form.nacionalidad }}
+            {{ form.nacionalidad.errors }}
+        </div>
 
-                <div class="form-group">
-                    <label for="{{ form.correo.id_for_label }}">{{ form.correo.label }}</label>
-                    {{ form.correo }}
-                    {{ form.correo.errors }}
-                </div>
+        <div class="form-group">
+            <label for="{{ form.fecha_nacimiento.id_for_label }}">{{ form.fecha_nacimiento.label }}</label>
+            {{ form.fecha_nacimiento }}
+            {{ form.fecha_nacimiento.errors }}
+        </div>
 
-                <div class="form-group">
-                    <label for="{{ form.nacionalidad.id_for_label }}">{{ form.nacionalidad.label }}</label>
-                    {{ form.nacionalidad }}
-                    {{ form.nacionalidad.errors }}
-                </div>
+        <div class="form-group full">
+            <label for="{{ form.biografia.id_for_label }}">{{ form.biografia.label }}</label>
+            {{ form.biografia }}
+            {{ form.biografia.errors }}
+        </div>
 
-                <div class="form-group">
-                    <label for="{{ form.fecha_nacimiento.id_for_label }}">{{ form.fecha_nacimiento.label }}</label>
-                    {{ form.fecha_nacimiento }}
-                    {{ form.fecha_nacimiento.errors }}
-                </div>
-
-                <div class="form-group full">
-                    <label for="{{ form.biografia.id_for_label }}">{{ form.biografia.label }}</label>
-                    {{ form.biografia }}
-                    {{ form.biografia.errors }}
-                </div>
-
-            </div>
-
-            <div class="form-actions">
-                <button type="submit" class="btn-primary">Actualizar</button>
-                <a href="{% url 'lista_autores' %}" class="btn-back">← Volver a la lista de autores</a>
-            </div>
-        </form>
     </div>
-</body>
 
-</html>
+    <div class="form-actions">
+        <button type="submit" class="btn-primary">Actualizar</button>
+        <a href="{% url 'lista_autores' %}" class="btn-back">← Volver</a>
+    </div>
+</form>
