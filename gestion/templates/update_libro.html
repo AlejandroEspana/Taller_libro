@@ -1,8 +1,0 @@
-<!-- Template para actualizar un Libro -->
-<h2>Actualizar Libro</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Actualizar</button>
-</form>
-<a href="{% url 'lista_libros' %}">Volver a la lista de libros</a>
