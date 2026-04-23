@@ -1,0 +1,46 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <h2>{{ titulo }}</h2>
+    <a class="button secondary" href="{% url 'lista_libros' %}">Volver</a>
+</div>
+
+<form class="form-panel" method="post" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="form-grid">
+        <div class="field">
+            <label for="{{ form.titulo.id_for_label }}">{{ form.titulo.label }}</label>
+            {{ form.titulo }}
+            {{ form.titulo.errors }}
+        </div>
+        <div class="field">
+            <label for="{{ form.fecha_publicacion.id_for_label }}">{{ form.fecha_publicacion.label }}</label>
+            {{ form.fecha_publicacion }}
+            {{ form.fecha_publicacion.errors }}
+        </div>
+        <div class="field">
+            <label for="{{ form.genero.id_for_label }}">{{ form.genero.label }}</label>
+            {{ form.genero }}
+            {{ form.genero.errors }}
+        </div>
+        <div class="field">
+            <label for="{{ form.isbn.id_for_label }}">{{ form.isbn.label }}</label>
+            {{ form.isbn }}
+            {{ form.isbn.errors }}
+        </div>
+        <div class="field full">
+            <label for="{{ form.autor.id_for_label }}">{{ form.autor.label }}</label>
+            {{ form.autor }}
+            {{ form.autor.errors }}
+        </div>
+    </div>
+    <div class="form-actions">
+        <button type="submit">{{ boton }}</button>
+        <a class="button secondary" href="{% url 'lista_libros' %}">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

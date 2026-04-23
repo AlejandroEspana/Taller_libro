@@ -1,18 +1,42 @@
-from django.urls import path
-from . import views
+from django import forms
 
-urlpatterns = [
-    path('', views.inicio, name='inicio'),
+from .models import Autor, Libro
 
-    # Autores
-    path('autores/', views.lista_autores, name='lista_autores'),
-    path('autores/crear/', views.crear_autor, name='crear_autor'),
-    path('autores/<int:pk>/actualizar/', views.actualizar_autor, name='actualizar_autor'),
-    path('autores/<int:pk>/eliminar/', views.eliminar_autor, name='eliminar_autor'),
 
-    # Libros
-    path('libros/', views.lista_libros, name='lista_libros'),
-    path('libros/crear/', views.crear_libro, name='crear_libro'),
-    path('libros/<int:pk>/actualizar/', views.actualizar_libro, name='actualizar_libro'),
-    path('libros/<int:pk>/eliminar/', views.eliminar_libro, name='eliminar_libro'),
-]
+class AutorForm(forms.ModelForm):
+    class Meta:
+        model = Autor
+        fields = ['nombre', 'correo', 'nacionalidad', 'fecha_nacimiento', 'biografia']
+        labels = {
+            'nombre': 'Nombre',
+            'correo': 'Correo electronico',
+            'nacionalidad': 'Nacionalidad',
+            'fecha_nacimiento': 'Fecha de nacimiento',
+            'biografia': 'Biografia',
+        }
+        widgets = {
+            'nombre': forms.TextInput(attrs={'placeholder': 'Nombre completo'}),
+            'correo': forms.EmailInput(attrs={'placeholder': 'correo@ejemplo.com'}),
+            'nacionalidad': forms.TextInput(attrs={'placeholder': 'Ej: Colombiana'}),
+            'fecha_nacimiento': forms.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
+            'biografia': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Breve biografia'}),
+        }
+
+
+class LibroForm(forms.ModelForm):
+    class Meta:
+        model = Libro
+        fields = ['titulo', 'fecha_publicacion', 'genero', 'isbn', 'autor']
+        labels = {
+            'titulo': 'Titulo',
+            'fecha_publicacion': 'Fecha de publicacion',
+            'genero': 'Genero',
+            'isbn': 'ISBN',
+            'autor': 'Autor',
+        }
+        widgets = {
+            'titulo': forms.TextInput(attrs={'placeholder': 'Titulo del libro'}),
+            'fecha_publicacion': forms.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
+            'genero': forms.TextInput(attrs={'placeholder': 'Ej: Novela'}),
+            'isbn': forms.TextInput(attrs={'placeholder': '978-XXXXXXXXXX'}),
+        }

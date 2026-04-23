@@ -1,0 +1,18 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Eliminar autor{% endblock %}
+
+{% block content %}
+<div class="confirm-panel">
+    <h2>Eliminar autor</h2>
+    <p>Desea eliminar a <strong>{{ autor.nombre }}</strong>?</p>
+    <p class="muted">Esta accion tambien eliminara los libros relacionados con este autor.</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button class="danger" type="submit">Si, eliminar</button>
+            <a class="button secondary" href="{% url 'lista_autores' %}">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
